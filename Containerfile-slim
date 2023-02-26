@@ -16,7 +16,7 @@ RUN set -xeu; \
     chmod -cR 755 grep; \
     chown -cR 0:0 grep; \
     ! ldd grep && :; \
-    ./grep -V ; ls -lah ./grep
+    ./grep -V
 
 # slim static coreutils image
 FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
