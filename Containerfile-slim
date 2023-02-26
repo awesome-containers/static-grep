@@ -1,0 +1,23 @@
+# https://github.com/awesome-containers/static-bash
+ARG STATIC_BASH_VERSION=5.2.15
+ARG STATIC_GREP_VERSION=3.8
+
+FROM ghcr.io/awesome-containers/static-grep:$STATIC_GREP_VERSION AS static-grep
+
+FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
+
+WORKDIR /src/grep
+COPY --from=static-grep /bin/grep /bin/egrep /bin/fgrep ./
+
+RUN set -xeu; \
+    strip -s -R .comment -R .gnu.version --strip-unneeded grep; \
+    upx --no-progress --no-color grep; \
+    upx -t --no-progress --no-color grep; \
+    chmod -cR 755 grep; \
+    chown -cR 0:0 grep; \
+    ! ldd grep && :; \
+    ./grep -V
+
+# slim static coreutils image
+FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
+COPY --from=build /src/grep/ /bin/
