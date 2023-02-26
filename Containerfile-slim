@@ -18,6 +18,6 @@ RUN set -xeu; \
     ! ldd grep && :; \
     ./grep -V
 
-# slim static coreutils image
+# slim static grep image
 FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
 COPY --from=build /src/grep/ /bin/

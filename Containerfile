@@ -24,6 +24,6 @@ RUN set -xeu; \
     ! ldd bin/grep && :; \
     ./bin/grep -V
 
-# static Curl image
+# static grep image
 FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION
 COPY --from=build /src/grep/bin/ /bin/
