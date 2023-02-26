@@ -2,7 +2,7 @@
 
 Statically linked **Grep** container image with [Bash]
 
-> 16M
+> 1.2M
 
 ```bash
 ghcr.io/awesome-containers/static-curl:latest
@@ -15,7 +15,7 @@ docker.io/awesomecontainers/static-curl:3.8
 Slim statically linked **Grep** container image with [Bash] stripped and
 packaged with [UPX]
 
-> 1.8M
+> 113K
 
 ```bash
 ghcr.io/awesome-containers/static-curl:latest-slim
