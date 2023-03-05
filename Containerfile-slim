@@ -1,16 +1,24 @@
 # https://github.com/awesome-containers/static-bash
 ARG STATIC_BASH_VERSION=5.2.15
+ARG STATIC_BASH_IMAGE=ghcr.io/awesome-containers/static-bash
+
+# https://github.com/awesome-containers/static-grep
 ARG STATIC_GREP_VERSION=3.8
+ARG STATIC_GREP_IMAGE=ghcr.io/awesome-containers/static-grep
 
-FROM ghcr.io/awesome-containers/static-grep:$STATIC_GREP_VERSION AS static-grep
+# https://github.com/awesome-containers/alpine-build-essential
+ARG BUILD_ESSENTIAL_VERSION=3.17
+ARG BUILD_ESSENTIAL_IMAGE=ghcr.io/awesome-containers/alpine-build-essential
 
-FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
+
+FROM $STATIC_BASH_IMAGE:$STATIC_BASH_VERSION-slim AS static-bash
+FROM $STATIC_GREP_IMAGE:$STATIC_GREP_VERSION AS static-grep
+FROM $BUILD_ESSENTIAL_IMAGE:$BUILD_ESSENTIAL_VERSION AS build
 
 WORKDIR /src/grep
 COPY --from=static-grep /bin/grep /bin/egrep /bin/fgrep ./
 
 RUN set -xeu; \
-    strip -s -R .comment -R .gnu.version --strip-unneeded grep; \
     upx --no-progress --no-color grep; \
     upx -t --no-progress --no-color grep; \
     chmod -cR 755 grep; \
@@ -19,5 +27,5 @@ RUN set -xeu; \
     ./grep -V
 
 # slim static grep image
-FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
+FROM static-bash
 COPY --from=build /src/grep/ /bin/

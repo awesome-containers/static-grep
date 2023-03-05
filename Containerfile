@@ -1,7 +1,14 @@
 # https://github.com/awesome-containers/static-bash
 ARG STATIC_BASH_VERSION=5.2.15
+ARG STATIC_BASH_IMAGE=ghcr.io/awesome-containers/static-bash
 
-FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
+# https://github.com/awesome-containers/alpine-build-essential
+ARG BUILD_ESSENTIAL_VERSION=3.17
+ARG BUILD_ESSENTIAL_IMAGE=ghcr.io/awesome-containers/alpine-build-essential
+
+
+FROM $STATIC_BASH_IMAGE:$STATIC_BASH_VERSION AS static-bash
+FROM $BUILD_ESSENTIAL_IMAGE:$BUILD_ESSENTIAL_VERSION AS build
 
 # https://git.savannah.gnu.org/cgit/grep.git
 ARG GREP_VERSION=3.8
@@ -19,11 +26,12 @@ RUN set -xeu; \
     make -j"$(nproc)"; \
     mkdir bin; \
     cp src/grep src/fgrep src/egrep bin/; \
-    chmod -cR 755 src/grep src/fgrep bin/*; \
-    chown -cR 0:0 src/grep src/fgrep bin/*; \
+    strip -s -R .comment --strip-unneeded bin/grep; \
+    chmod -cR 755 bin/*; \
+    chown -cR 0:0 bin/*; \
     ! ldd bin/grep && :; \
     ./bin/grep -V
 
 # static grep image
-FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION
+FROM static-bash
 COPY --from=build /src/grep/bin/ /bin/
