@@ -14,7 +14,7 @@ FROM $BUILD_ESSENTIAL_IMAGE:$BUILD_ESSENTIAL_VERSION AS build
 RUN apk add --no-cache pcre2-dev
 
 # https://git.savannah.gnu.org/cgit/grep.git
-ARG GREP_VERSION=3.8
+ARG GREP_VERSION=3.9
 
 WORKDIR /src/grep
 RUN set -xeu; \

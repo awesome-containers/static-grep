@@ -2,27 +2,27 @@
 
 Statically linked [Grep] container image with [Bash]
 
-> 1,3M (1,1M bash)
+> 1,9M (1,1M bash)
 
 ```bash
 ghcr.io/awesome-containers/static-grep:latest
-ghcr.io/awesome-containers/static-grep:3.8
+ghcr.io/awesome-containers/static-grep:3.9
 
 docker.io/awesomecontainers/static-grep:latest
-docker.io/awesomecontainers/static-grep:3.8
+docker.io/awesomecontainers/static-grep:3.9
 ```
 
 Slim statically linked [Grep] container image with [Bash] stripped and
 packaged with [UPX]
 
-> 696K (578K bash)
+> 888K (578K bash)
 
 ```bash
 ghcr.io/awesome-containers/static-grep:latest-slim
-ghcr.io/awesome-containers/static-grep:3.8-slim
+ghcr.io/awesome-containers/static-grep:3.9-slim
 
 docker.io/awesomecontainers/static-grep:latest-slim
-docker.io/awesomecontainers/static-grep:3.8-slim
+docker.io/awesomecontainers/static-grep:3.9-slim
 ```
 
 [Grep]: https://www.gnu.org/software/grep/
