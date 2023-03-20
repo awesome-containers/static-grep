@@ -10,6 +10,9 @@ ARG BUILD_ESSENTIAL_IMAGE=ghcr.io/awesome-containers/alpine-build-essential
 FROM $STATIC_BASH_IMAGE:$STATIC_BASH_VERSION AS static-bash
 FROM $BUILD_ESSENTIAL_IMAGE:$BUILD_ESSENTIAL_VERSION AS build
 
+# hadolint ignore=DL3018
+RUN apk add --no-cache pcre2-dev
+
 # https://git.savannah.gnu.org/cgit/grep.git
 ARG GREP_VERSION=3.8
 
