@@ -6,10 +6,10 @@ Statically linked [Grep] container image with [Bash]
 
 ```bash
 ghcr.io/awesome-containers/static-grep:latest
-ghcr.io/awesome-containers/static-grep:3.9
+ghcr.io/awesome-containers/static-grep:3.10
 
 docker.io/awesomecontainers/static-grep:latest
-docker.io/awesomecontainers/static-grep:3.9
+docker.io/awesomecontainers/static-grep:3.10
 ```
 
 Slim statically linked [Grep] container image with [Bash] stripped and
@@ -19,10 +19,10 @@ packaged with [UPX]
 
 ```bash
 ghcr.io/awesome-containers/static-grep:latest-slim
-ghcr.io/awesome-containers/static-grep:3.9-slim
+ghcr.io/awesome-containers/static-grep:3.10-slim
 
 docker.io/awesomecontainers/static-grep:latest-slim
-docker.io/awesomecontainers/static-grep:3.9-slim
+docker.io/awesomecontainers/static-grep:3.10-slim
 ```
 
 [Grep]: https://www.gnu.org/software/grep/
